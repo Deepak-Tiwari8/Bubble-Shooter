@@ -1,0 +1,230 @@
+// Start Game Function 
+function gameStartbtn() {
+   document.getElementById("icon").style.display = "none";
+   if (document.getElementById("icon").style.display = "none") {
+      document.getElementById("dyanmic_ball").style.display = "block";
+      dyanmicBallGenerator();
+      gameWin();
+   }
+}
+function dyanmicBallGenerator() {
+   var ball_container = document.getElementById("ball_container");
+   for (var i = 1; i <= 10; i++) {
+      for (var j = 1; j <= 15; j++) {
+         var ball = document.createElement("div");
+         ball.style.width = "53.3px";
+         ball.style.height = "50px";
+         ball.style.float = "left";
+         ball.style.borderRadius = "50%";
+         ball.id = (i) + "_" + (j);
+         ball_container.appendChild(ball);
+         ball.addEventListener("click", buttonPressed);
+         if (i <= 6) {
+            for (var k = j; k < j + 1; k++) {
+               if (ball.id < "7_1")
+                  ball.className = getColor();
+            }
+         }
+         else if (7 <= 10) {
+            ball.style.opacity = "1";
+         }
+      }
+   }
+
+   var clearboth = document.createElement("div");
+   document.getElementById('ball_create').style.display = 'block';
+   ball_container.appendChild(clearboth);
+}
+
+function getColor() {
+   var no1 = Math.floor(Math.random() * 4) + 1;
+   var arr = ['', 'springgreen', 'blue', 'yellow', 'red'];
+   return arr[no1];
+}
+
+function getBallColorChange() {
+   var ballID = document.getElementById("ball1");
+   ballID.className = getColor();
+}
+
+
+function buttonPressed() {
+   var clickId = this.id;
+   if (document.getElementById(clickId).className == "") {
+      var ballID = document.getElementById("ball1");
+      var CurrentId = placeBall(clickId, ballID);
+      if (CurrentId.split("_")[0] == "10")
+         gameOver();
+      getTopRowDriver(CurrentId);
+      getTopColRigthDriver(CurrentId);
+      getTopColLeftDriver(CurrentId);
+      getBallColorChange();
+   }
+}
+
+function getTopRowDriver(currentClickId) {
+   var row = parseInt(currentClickId.split("_")[0]);
+   var col = parseInt(currentClickId.split("_")[1]);
+   var CurrentId = document.getElementById(currentClickId);
+   var CurrentTopId = row - 1 + "_" + col;
+   var CurrentTop = document.getElementById(CurrentTopId);
+   if (CurrentId.className == CurrentTop.className && CurrentId.className == document.getElementById(row - 2 + "_" + col).className)
+      removeTop(currentClickId, CurrentTopId);
+
+}
+
+function removeTop(CurrentId, CurrentTopId) {
+   var row = parseInt(CurrentId.split("_")[0]);
+   var col = parseInt(CurrentId.split("_")[1]);
+   for (var i = row; i > 0; i--) {
+     //   getTopColRigthDriver(CurrentId ,CurrentTopId);
+      //  getTopColLeftDriver(CurrentId,CurrentTopId);
+
+      if (CurrentId.split("_")[0] == "1") {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+       if (document.getElementById(CurrentId).className == document.getElementById(CurrentTopId).className) {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      else {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      CurrentId = CurrentTopId;
+      var tempRow = parseInt(CurrentTopId.split("_")[0]);
+      CurrentTopId = tempRow - 1 + "_" + col;
+   }
+   gameWin();
+}
+
+function getTopColRigthDriver(currentClickId) {
+   var row = parseInt(currentClickId.split("_")[0]);
+   var col = parseInt(currentClickId.split("_")[1]);
+   var CurrentId = document.getElementById(currentClickId);
+   var CurrentTopColRIghtId = row + "_" + (col + 1);
+   var CurrentTopColRIght = document.getElementById(CurrentTopColRIghtId);
+   if (CurrentId.className == CurrentTopColRIght.className && CurrentId.className == document.getElementById(row + "_" + (col + 2)).className)
+      removeTopColRigth(currentClickId, CurrentTopColRIghtId);
+}
+
+function removeTopColRigth(CurrentId, CurrentTopColRIghtId) {
+   var row = parseInt(CurrentId.split("_")[0]);
+   var col = parseInt(CurrentId.split("_")[1]);
+   for (var i = col; i <= 15; i++) {
+      //  getTopRowDriver(CurrentId);
+      // getTopColLeftDriver(CurrentId);
+      if (CurrentId.split("_")[1] == "15") {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      if (document.getElementById(CurrentId).className == document.getElementById(CurrentTopColRIghtId).className) {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+      }
+      else {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      CurrentId = CurrentTopColRIghtId;
+      var tempRow = parseInt(CurrentTopColRIghtId.split("_")[1]);
+      CurrentTopColRIghtId = (tempRow - 1) + "_" + (col + 1);
+   }
+   gameWin();
+}
+
+
+function getTopColLeftDriver(currentClickId) {
+   var row = parseInt(currentClickId.split("_")[0]);
+   var col = parseInt(currentClickId.split("_")[1]);
+   var CurrentId = document.getElementById(currentClickId);
+   var CurrentTopColLeftId = row + "_" + (col - 1);
+   var CurrentTopColLeft = document.getElementById(CurrentTopColLeftId);
+   if (CurrentId.className == CurrentTopColLeft.className && CurrentId.className == document.getElementById(row + "_" + (col - 2)).className)
+      removeTopColRigth(currentClickId, CurrentTopColLeftId);
+}
+
+function removeTopColLeft(CurrentId, CurrentTopColLeftId) {
+   var row = parseInt(CurrentId.split("_")[0]);
+   var col = parseInt(CurrentId.split("_")[1]);
+   for (var i = col; i >= 1; i--) {
+      //  getTopRowDriver(CurrentId);
+      //  getTopColRigthDriver(CurrentId);
+      if (CurrentId.split("_")[1] == "1") {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      if (document.getElementById(CurrentId).className == document.getElementById(CurrentTopColLeftId).className) {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+      }
+      else {
+         document.getElementById(CurrentId).classList.remove(document.getElementById(CurrentId).className);
+         ScorePlayer();
+         break;
+      }
+      CurrentId = CurrentTopColLeftId;
+      var tempRow = parseInt(CurrentTopColLeftId.split("_")[1]);
+      CurrentTopColLeftId = (tempRow - 1) + "_" + (col - 1);
+   }
+   gameWin();
+}
+
+function placeBall(CurrentId, ballID) {
+   var row = parseInt(CurrentId.split("_")[0]);
+   var col = parseInt(CurrentId.split("_")[1]);
+   var CurrentTopId = row - 1 + "_" + col;
+   var CurrentBottomRow = row + 1;
+   for (let i = row; i > 0; i--) {
+      if (document.getElementById(CurrentTopId).className != "") {
+         document.getElementById(CurrentId).className = ballID.className;
+         return CurrentId;
+      }
+      CurrentId = CurrentTopId;
+      var tempRow = parseInt(CurrentTopId.split("_")[0]);
+      CurrentTopId = tempRow - 1 + "_" + col;
+   }
+}
+
+var count = 0;
+var ball = 10;
+function ScorePlayer() {
+   count = ball + count;
+   document.getElementById("result").innerHTML = "Player Score = " + count;
+   return count;
+}
+
+function gameOver() {
+   document.getElementById("GameOver").innerHTML = "You Loss Game";
+   document.getElementById("GameOver").style.display = "block";
+   document.getElementById("playerScore").innerHTML = "Player Score is = " + ScorePlayer();
+   document.getElementById("playerScore").style.display = "block";
+}
+
+function gameWin() {
+   var rowWin = 1;
+   var colWin = 1;
+   var winFlag = true;
+   while (rowWin <= 10) {
+      if (document.getElementById(rowWin + "_" + colWin).classList.length != 0) {
+         winFlag = false;
+         break;
+      }
+      colWin++;
+      if (colWin == 16) {
+         colWin = 1;
+         rowWin++;
+      }
+   }
+   if (winFlag)
+      document.getElementById("playerWin").style.display = "block";
+   document.getElementById("playerWin").innerHTML = "You Win";
+
+}

@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* Icon Section  */
+#icon{
+    width: 800px;
+    margin: 0 auto;
+    height: 400px;
+    border-radius: 20px;
+    background: linear-gradient(#e66465, #9198e5);
+}
+/* text_head  */
+#text_head{
+    text-align: center;
+    font-size: 25px;
+    color: blue;
+}
+/* Icon Image */
+.bubble_icon{
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+   margin: 15px 0px 0px 300px;
+}
+
+/* stat_game button */
+
+.stat_game{
+    width: 200px;
+    padding: 20px;
+    font-weight: bolder;
+    border-radius: 20px;
+    cursor: pointer;
+   margin: 60px 0px 0px 300px;   
+}
+
+.stat_game:hover{
+    background-color: deeppink;
+    color: white;
+}
+
+/* icon Game Screen Section  */
+
+#dyanmic_ball{
+    display: none;
+}
+#ball_container{
+    width: 800px;
+    margin: 0 auto;
+    height: 500px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color:grey;
+}
+
+
+/*Score Card Section   */
+#ball_create{
+    width: 800px;
+    height: 50px;
+    background-color: gold;
+    margin: 0 auto;
+    display: none;
+    position: relative;
+}
+
+/* Ball Player Main */
+#ball1{
+    width:53.3px;
+    height:50px;
+    margin: -46px 0px 0px 375px;
+    border-radius: 50%;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.red{
+    background-color: red;
+}
+
+.springgreen{
+    background-color: springgreen;
+}
+
+/* Player_Score */
+
+.score_player{
+    width: 200px;
+    display: inline;
+    padding: 4px;
+}
+
+#result{
+    padding: 4px;
+}
+
+/* player_game Over */
+.player_game_Over{
+    width: 175px;
+    margin-top: -32px;
+    margin-left: 618px;
+    color: black;
+    font-weight: bolder;
+    display: none;
+}
+
+
+#playerScore
+{
+    width: 200px;
+    margin-top: -50px;
+    margin-left: 630px;
+    color: black;
+    font-weight: bolder;
+    display: inline-block;
+    position: absolute;
+    display: none;
+}
+
+/* Restart */
+#restart{
+    width: 200px;
+    margin: 20px 0px 0px 300px;
+    height: 40px;
+    background-color: #49c224;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 40px;
+    color: black;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+#restart:hover{
+    background-color: gold;
+    color: black;
+}
+
+
+/* playerWin  */
+
+#playerWin{
+    width: 200px;
+    margin-top: -44px;
+    margin-left: 662px;
+    color: black;
+    font-weight: bolder;
+    display: inline-block;
+    position: absolute;
+    display: none;
+}
